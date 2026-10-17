@@ -13,10 +13,10 @@ test('compiled command preserves the executable entry point', async () => {
 });
 
 for (const entry of ['../dist/index.js', '../src/index.js']) {
-for (const mode of [undefined, 'extension', 'chrome']) {
+for (const mode of [undefined, 'playwright', 'chrome']) {
 test(`stdio handshake, discovery and validation through ${entry} (${mode ?? 'default standalone'})`, async t => {
   const directory = await mkdtemp(join(tmpdir(), 'organizer-mcp-'));
-  const transport = new StdioClientTransport({ command: process.execPath, args: [fileURLToPath(new URL(entry, import.meta.url))], cwd: directory, env: { CHATGPT_DATA_DIR: directory, CHATGPT_BRIDGE_PORT: '0', ...(mode ? { CHATGPT_TRANSPORT: mode } : {}) }, stderr: 'pipe' });
+  const transport = new StdioClientTransport({ command: process.execPath, args: [fileURLToPath(new URL(entry, import.meta.url))], cwd: directory, env: { CHATGPT_DATA_DIR: directory, ...(mode ? { CHATGPT_TRANSPORT: mode } : {}) }, stderr: 'pipe' });
   let stderr = '';
   transport.stderr?.on('data', chunk => { stderr += chunk.toString(); });
   const client = new Client({ name: 'organizer-test', version: '1.0.0' });
@@ -29,7 +29,7 @@ test(`stdio handshake, discovery and validation through ${entry} (${mode ?? 'def
   assert.equal(JSON.parse(status.content[0].text).browser_open, false);
   const missing = await client.callTool({ name: 'chatgpt_list_conversations', arguments: {} });
   assert.equal(missing.isError, true);
-  assert.equal(JSON.parse(missing.content[0].text).code, mode === 'extension' ? 'EXTENSION_NOT_CONNECTED' : 'LOGIN_REQUIRED');
+  assert.equal(JSON.parse(missing.content[0].text).code, 'LOGIN_REQUIRED');
   const invalid = await client.callTool({ name: 'chatgpt_get_conversation', arguments: { conversation_id: '../../api/auth/session' } });
   assert.equal(invalid.isError, true);
   assert.equal(stderr, '');

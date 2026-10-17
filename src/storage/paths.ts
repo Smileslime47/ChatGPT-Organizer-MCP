@@ -19,7 +19,7 @@ export function dataDirectory({
 
   // Preserve existing source installations without placing new data in npx's cache.
   const legacy = path.join(root, '.local');
-  if (['bridge-config.json', 'project-routes.json'].some(name => exists(path.join(legacy, name)))) return legacy;
+  if (['project-routes.json', 'browser-choice.json', 'browser'].some(name => exists(path.join(legacy, name)))) return legacy;
 
   if (platform === 'win32') {
     return path.join(env.LOCALAPPDATA || path.join(home, 'AppData', 'Local'), 'chatgpt-organizer');

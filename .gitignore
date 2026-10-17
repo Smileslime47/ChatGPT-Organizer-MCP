@@ -1,8 +1,6 @@
 node_modules/
 dist/
 release/
-extension/*.js
-extension/*.js.map
 .local/
 .env
 .env.*

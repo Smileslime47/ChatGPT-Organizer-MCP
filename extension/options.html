@@ -1,6 +1,0 @@
-<!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatGPT Organizer 连接</title><link rel="stylesheet" href="options.css"></head>
-<body><main><span class="eyebrow">CHATGPT ORGANIZER</span><h1>登录 ChatGPT，即可开始整理</h1><p>启动 MCP 后，扩展会自动连接并找到已登录的 ChatGPT 页面。</p>
-<section aria-label="连接状态"><div class="status-row"><span>MCP 服务</span><strong id="service">正在检查…</strong></div><div class="status-row"><span>ChatGPT</span><strong id="chatgpt">正在检查…</strong></div><p id="page" class="foot"></p><p id="status" role="status" aria-live="polite"></p><div class="actions"><button id="connect">重试连接</button><a class="button secondary" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">打开 ChatGPT</a></div></section>
-<details><summary>高级设置</summary><p>仅在 MCP 使用自定义端口时修改，默认无需设置。</p><form id="connection-form"><label for="port">连接端口</label><div class="actions"><input id="port" type="number" min="1" max="65535" step="1" value="43127" required><button id="save" class="secondary" type="submit">保存并连接</button></div></form></details>
-<p class="foot">首次使用需先在 MCP 客户端添加服务。遇到连接问题时，可运行 <code>npm run doctor</code> 检查。</p></main><script type="module" src="options.js"></script></body></html>

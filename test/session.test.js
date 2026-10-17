@@ -21,7 +21,7 @@ test('MCP and Organizer work with only the browser session interface', async t =
     finishRecording: async (_candidate, cancel) => ({ cancelled: cancel }),
     close: async () => {},
   };
-  // No Page, BrowserContext, extension bridge or concrete class is required.
+  // No Page, BrowserContext or concrete class is required.
   const routes = { status: () => ({}) };
   const server = createServer({ browser, routes, organizer: new Organizer(browser, routes) });
   const client = new Client({ name: 'session-contract', version: '1.0.0' });
@@ -45,23 +45,17 @@ test('MCP and Organizer work with only the browser session interface', async t =
 test('all configured providers expose the interface without launching a browser', async t => {
   const directory = await mkdtemp(join(tmpdir(), 'organizer-session-'));
   t.after(() => rm(directory, { recursive: true, force: true }));
-  for (const kind of [undefined, 'playwright', 'chrome', 'extension']) {
-    const session = await createBrowserSession(directory, {}, { CHATGPT_TRANSPORT: kind, CHATGPT_BRIDGE_PORT: '0' });
+  for (const kind of [undefined, 'playwright', 'chrome']) {
+    const session = await createBrowserSession(directory, {}, { CHATGPT_TRANSPORT: kind });
     try {
       for (const method of ['initialize', 'open', 'login', 'status', 'request', 'startRecording', 'finishRecording', 'close']) {
         assert.equal(typeof session[method], 'function', `${kind ?? 'default'}.${method}`);
       }
       await session.initialize();
       assert.equal((await session.status()).browser_open, false);
-      if (kind === 'extension') {
-        const login = await session.login();
-        assert.match(login.instruction, /扩展/);
-        await session.close();
-        await login.closed;
-      }
     } finally { await session.close(); }
   }
   await assert.rejects(createBrowserSession(directory, {}, { CHATGPT_TRANSPORT: 'unknown' }), { code: 'INVALID_TRANSPORT' });
   await assert.rejects(createBrowserSession(directory, {}, { CHATGPT_TRANSPORT: '__proto__' }), { code: 'INVALID_TRANSPORT' });
-  await assert.rejects(createBrowserSession(directory, {}, { CHATGPT_TRANSPORT: 'extension', CHATGPT_BRIDGE_PORT: '-1' }), { code: 'INVALID_BRIDGE_PORT' });
+  await assert.rejects(createBrowserSession(directory, {}, { CHATGPT_TRANSPORT: 'extension' }), { code: 'INVALID_TRANSPORT' });
 });

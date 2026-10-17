@@ -4,11 +4,9 @@ export interface BackendStatus {
   browser_open: boolean;
   logged_in: boolean;
   action?: string;
-  transport?: 'chrome' | 'extension' | 'playwright';
+  transport?: 'chrome' | 'playwright';
   login_pending?: boolean;
   login_check_failed?: boolean;
-  bridge_running?: boolean;
-  extension_connected?: boolean;
 }
 
 export interface LoginHandle {

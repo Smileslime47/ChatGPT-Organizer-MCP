@@ -15,7 +15,7 @@ test('new installations keep data in the operating system user data directory', 
 
 test('existing source data is retained and an explicit data directory always takes priority', () => {
   const options = { root: '/source', platform: 'linux', home: '/users/example', cwd: '/working', env: {} };
-  for (const file of ['bridge-config.json', 'project-routes.json']) {
+  for (const file of ['project-routes.json', 'browser-choice.json', 'browser']) {
     const exists = candidate => candidate === `/source/.local/${file}`;
     assert.equal(dataDirectory({ ...options, exists }), '/source/.local');
     assert.equal(dataDirectory({ ...options, exists, env: { CHATGPT_DATA_DIR: './custom' } }), '/working/custom');

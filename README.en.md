@@ -4,7 +4,7 @@
 
 Let AI search, rename, and archive your ChatGPT conversations, and organize them into Projects. Preview changes before confirming and executing them.
 
-Sign in to ChatGPT in a dedicated browser window, then let the MCP server handle organization. No browser extension, manual remote debugging setup, or separate service is required.
+Sign in to ChatGPT in a dedicated browser window, then let the MCP server handle organization. No manual remote debugging setup or separate service is required.
 
 ## Installation
 
@@ -54,7 +54,7 @@ Conversation listing, search, renaming, and archiving are ready to use. Project 
 
 This project uses ChatGPT's internal web APIs and requires no API key. These APIs may change as the website evolves. Concurrent use of multiple accounts, deletion tools, and a remote MCP URL are not supported.
 
-The [development guide](docs/GUIDE.md) (Chinese) covers browser configuration, tools, and packaging. Connecting to your everyday Chrome session or using a browser extension are optional modes.
+The [development guide](docs/GUIDE.md) (Chinese) covers browser configuration, tools, and packaging, including the optional mode for connecting to your everyday Chrome session.
 
 ## License
 
