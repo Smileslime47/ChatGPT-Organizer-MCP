@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "routes": {
+    "list_projects": {
+      "method": "GET",
+      "pathname": "/backend-api/gizmos/snorlax/sidebar",
+      "query": [
+        [
+          "conversations_per_gizmo",
+          "5"
+        ],
+        [
+          "limit",
+          "20"
+        ],
+        [
+          "owned_only",
+          "false"
+        ]
+      ],
+      "learned_at": "2026-10-17T08:40:11.015Z"
+    },
+    "list_project_conversations": {
+      "method": "GET",
+      "pathname": "/backend-api/gizmos/{{project_id}}/conversations",
+      "query": [
+        [
+          "limit",
+          "5"
+        ],
+        [
+          "owned_only",
+          "false"
+        ]
+      ],
+      "learned_at": "2026-10-17T08:41:31.644Z"
+    },
+    "move_conversation": {
+      "method": "PATCH",
+      "pathname": "/backend-api/conversation/{{conversation_id}}",
+      "query": [],
+      "body": {
+        "gizmo_id": "{{project_id}}"
+      },
+      "learned_at": "2026-10-17T08:58:00.771Z"
+    },
+    "rename_project": {
+      "method": "PATCH",
+      "pathname": "/backend-api/projects/{{project_id}}",
+      "query": [],
+      "body": {
+        "name": "{{name}}"
+      },
+      "learned_at": "2026-10-17T08:59:08.188Z"
+    },
+    "create_project": {
+      "method": "POST",
+      "pathname": "/backend-api/projects",
+      "query": [],
+      "body": {
+        "emoji": null,
+        "instructions": "",
+        "memory_scope": "unset",
+        "name": "{{name}}",
+        "theme": null
+      },
+      "learned_at": "2026-10-17T09:03:17.145Z"
+    }
+  }
+}

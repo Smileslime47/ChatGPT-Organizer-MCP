@@ -1,0 +1,5 @@
+[mcp_servers.chatgpt-organizer]
+command = "npx"
+args = ["--yes", "--package=/absolute/path/chatgpt-organizer-mcp-1.0.0.tgz", "chatgpt-organizer"]
+startup_timeout_sec = 60
+tool_timeout_sec = 180
